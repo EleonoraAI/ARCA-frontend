@@ -23,12 +23,12 @@
             if (!workspace) { return; }
             workspace.getModel().importLayout({        
                 dataProvider: new Ontodia.SparqlDataProvider({
-                    endpointUrl: 'https://library-ontodia-org.herokuapp.com/sparql',
+                    endpointUrl: 'http://localhost:9999/blazegraph/namespace/ARCA_triple_store/sparql',
                     imagePropertyUris: [                
                         'http://xmlns.com/foaf/0.1/img',
                     ],
                     queryMethod: Ontodia.SparqlQueryMethod.GET
-                }, Ontodia.OWLStatsSettings),
+                }, Ontodia.WikidataSettings),
             });
         }
 
