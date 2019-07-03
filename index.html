@@ -1,48 +1,32 @@
+<!DOCTYPE html>
 <html>
-
-<head>
-  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-  <script type="text/javascript" src="https://unpkg.com/ontodia@0.8.0/dist/ontodia-full.min.js"></script>
-  <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/react/15.6.2/react.js"></script>
-  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/15.6.2/react-dom.js"></script>
-
-  <style type="text/css">
-    html, body, #container {
-      height: 100%;
-      overflow: hidden;
-      margin: 0;
-      padding: 0;
-    }
-  </style>
-
-  <script type="text/javascript">
-    //<![CDATA[
-    window.onload = function () {
-        function onWorkspaceMounted(workspace) {
-            if (!workspace) { return; }
-            workspace.getModel().importLayout({        
-                dataProvider: new Ontodia.SparqlDataProvider({
-                    endpointUrl: 'http://localhost:9999/blazegraph/namespace/ARCA_triple_store/sparql',
-                    imagePropertyUris: [                
-                        'http://xmlns.com/foaf/0.1/img',
-                    ],
-                    queryMethod: Ontodia.SparqlQueryMethod.GET
-                }, Ontodia.WikidataSettings),
-            });
+    <head>
+        <meta http-equiv="Content-type" content="text/html; charset=utf-8"/>
+        <link rel="icon" href="data:;base64,iVBORw0KGgo=">
+        <title>Ontodia bundling demo</title>
+    </head>
+    <style>
+        html, body, #root {
+            height: 100%;
+            overflow: hidden;
+            margin: 0;
+            padding: 0;
         }
-
-        ReactDOM.render(
-            React.createElement(Ontodia.Workspace, {ref: onWorkspaceMounted}),
-            document.getElementById('container')
-        );
-    }
-    //]]>
-  </script>
-</head>
-
-<body>
-  <div id="container"></div>
-</body>
-
+    </style>
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+    <body>
+        <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.1/jquery.min.js"></script>
+        <!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+            integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+        <!-- Optional theme -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
+            integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+        <!-- Latest compiled and minified JavaScript -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+            integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous">
+        </script>
+        <script src="/assets/bundle.js"></script>
+    </body>
 </html>
