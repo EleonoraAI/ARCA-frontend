@@ -17,13 +17,18 @@ function onWorkspaceMounted(workspace) {
 
     model.importLayout({
         validateLinks: true,
-        dataProvider: new Ontodia.SparqlDataProvider({
-            endpointUrl: '/sparql-endpoint',
-            imagePropertyUris: [
-                'http://collection.britishmuseum.org/id/ontology/PX_has_main_representation',
-                'http://xmlns.com/foaf/0.1/img',
-            ],
-        }, Ontodia.OWLStatsSettings),
+        dataProvider: new Ontodia.CompositeDataProvider([
+            new Ontodia.SparqlDataProvider({
+                endpointUrl: '/sparql-endpoint',
+            }, Ontodia.OWLStatsSettings),
+            new Ontodia.SparqlDataProvider({
+                endpointUrl: 'http://dbpedia.org/sparql',
+                imagePropertyUris: [
+                    'http://xmlns.com/foaf/0.1/depiction',
+                    'http://xmlns.com/foaf/0.1/img',
+                ],
+            }, Ontodia.DBPediaSettings),
+        ]),
     });
 }
 
@@ -31,9 +36,9 @@ const props = {
     ref: onWorkspaceMounted,
 };
 
- document.addEventListener('DOMContentLoaded', () => {
-        const container = document.createElement('div');
-        container.id = 'root';
-        document.body.appendChild(container);
-        ReactDOM.render(React.createElement(Ontodia.Workspace, props), container)
-    });
+document.addEventListener('DOMContentLoaded', () => {
+    const container = document.createElement('div');
+    container.id = 'root';
+    document.body.appendChild(container);
+    ReactDOM.render(React.createElement(Ontodia.Workspace, props), container)
+});
