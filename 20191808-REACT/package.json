@@ -1,0 +1,32 @@
+{
+  "name": "arca-frontend",
+  "version": "0.1.0",
+  "description": "Experimental frontend for project ARCA",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 0",
+    "start": "node ./node_modules/webpack-dev-server/bin/webpack-dev-server.js --inline --hot --port 5000 --host 0.0.0.0 --history-api-fallback"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/EleonoraAI/ARCA-frontend.git"
+  },
+  "author": "Miguel Ceriani",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/EleonoraAI/ARCA-frontend/issues"
+  },
+  "homepage": "https://github.com/EleonoraAI/ARCA-frontend#readme",
+  "dependencies": {
+    "ontodia": "^0.9.10",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6",
+    "webpack-cli": "^3.3.5",
+    "whatwg-fetch": "^3.0.0"
+  },
+  "devDependencies": {
+    "source-map-loader": "^0.2.4",
+    "webpack": "^4.35.2",
+    "webpack-dev-server": "^3.7.2"
+  }
+}
