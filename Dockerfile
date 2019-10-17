@@ -18,6 +18,3 @@ COPY . ./
 
 #start app
 CMD ["npm", "start"]
-
-#build image = "docker build -t arca ."
-#run image = "docker run -it -p 5000:5000 arca"
