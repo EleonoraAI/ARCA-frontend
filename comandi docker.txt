@@ -1,0 +1,11 @@
+elenco immagini : docker images -a
+
+elimina immagine: docker rmi node -f
+
+immagini in run: docker stats
+
+#build and tag docker image
+docker build -t react-docker .
+
+#run image
+docker run -it -p 8080:50 react-docker
