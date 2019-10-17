@@ -7,13 +7,20 @@ var Ontodia = require('ontodia')
 //require('jointjs/css/themes/default.css');
 
 function onWorkspaceMounted(workspace) {
-    if (!workspace) { return; }
+    if (!workspace) {
+        return;
+    }
 
     const model = workspace.getModel();
     // model.graph.on('action:iriClick', (iri) => {
     //     window.open(iri);
     //     console.log(iri);
     // });
+
+
+    //c'è un modo di fare la ricerca solo sullo sparql endpoint locale???
+    //vedere l'integrazione del codice!!!
+    //modularizzazione react macrocomponenti 1 ontodia 2 libreria etc.
 
     model.importLayout({
         validateLinks: true,
@@ -35,6 +42,13 @@ function onWorkspaceMounted(workspace) {
 const props = {
     ref: onWorkspaceMounted,
 };
+
+
+//stato dell'elemento in comune.. sapere la risorsa selezionata
+//stato risorsa selezionata
+// quando in ontodia viene visualizzata una nuova risorsa cambia questo stato... 
+// a seconda della risorsa selezionata visualizza i risultati corrispondenti.
+// tutorial come integrare più componenti come comporre a partire da un componente
 
 document.addEventListener('DOMContentLoaded', () => {
     const container = document.createElement('div');
