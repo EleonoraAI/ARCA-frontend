@@ -9,12 +9,12 @@ WORKDIR /app
 COPY package*.json ./
 ADD package.json /usr/src/app/package.json
 ADD package.json package-lock.json ./
+ADD start.sh /
 
 RUN npm install
-RUN SPARQL_ENDPOINT=http://localhost:9999/blazegraph/namespace/ARCA_triple_store/sparql
 
 #Bundle app source
 COPY . ./
 
 #start app
-CMD ["npm", "start"]
+CMD ["/start.sh"]
