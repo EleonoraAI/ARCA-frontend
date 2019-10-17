@@ -9,19 +9,14 @@ WORKDIR /app
 COPY package*.json ./
 ADD package.json /usr/src/app/package.json
 ADD package.json package-lock.json ./
-ADD start.sh /
+#ADD start.sh /
 
 RUN npm install
 
 #Bundle app source
 COPY . ./
+#ENTRYPOINT ["sh", "/start.sh"]
 
 #start app
-<<<<<<< HEAD
-CMD ["/start.sh"]
-=======
-CMD ["npm", "start"]
-
-#build image = "docker build -t arca ."
-#run image = "docker run -it -p 5000:5000 arca"
->>>>>>> parent of 2c4a5b9... Update Dockerfile
+CMD [ "npm", "start" ] 
+#CMD ["./start.sh"]
