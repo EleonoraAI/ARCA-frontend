@@ -51,9 +51,9 @@ go to : http://127.0.0.1:5000/
 
 `docker pull eleonorai/arca-front-end`
 
-Build container and launch it for the first time
+#### Build container and launch it for the first time
 
-docker run -d -p 127.0.0.1:5000:5000/tcp --name arca-front-end eleonorai/arca-front-end
+`docker run -d -p 127.0.0.1:5000:5000/tcp --name arca-front-end eleonorai/arca-front-end`
 
 
 ### Container management
