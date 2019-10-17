@@ -17,4 +17,11 @@ RUN npm install
 COPY . ./
 
 #start app
+<<<<<<< HEAD
 CMD ["/start.sh"]
+=======
+CMD ["npm", "start"]
+
+#build image = "docker build -t arca ."
+#run image = "docker run -it -p 5000:5000 arca"
+>>>>>>> parent of 2c4a5b9... Update Dockerfile
