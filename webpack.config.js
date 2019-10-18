@@ -1,6 +1,9 @@
 var webpack = require('webpack');
 var path = require('path');
 
+console.log(process.env.SPARQL_ENDPOINT);
+console.log("ciao");
+
 module.exports = {
     entry: ["whatwg-fetch", "./src/index.js"],
     output: {
@@ -28,7 +31,9 @@ module.exports = {
         proxy: {
             "/sparql-endpoint": {
                 target: process.env.SPARQL_ENDPOINT,
-                pathRewrite: {'/sparql-endpoint' : ''},
+                pathRewrite: {
+                    '/sparql-endpoint': ''
+                },
                 changeOrigin: true,
                 secure: false,
             },

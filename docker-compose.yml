@@ -1,0 +1,16 @@
+version: "3"
+services:
+  blazegraph:
+    image: metaphacts/blazegraph-basic:latest
+    ports:
+      - "127.0.0.1:9999:8080/tcp"
+
+  ontodia:
+    #command: sh -c "SPARQL_ENDPOINT=http://localhost:9999/blazegraph/namespace/kb/sparql npm start"
+    depends_on:
+      - blazegraph
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    ports:
+      - "5000:5000"
