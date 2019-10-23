@@ -1,16 +1,20 @@
 version: "3"
 services:
-  blazegraph:
-    image: metaphacts/blazegraph-basic:latest
-    ports:
-      - "127.0.0.1:9999:8080/tcp"
-
-  ontodia:
-    #command: sh -c "SPARQL_ENDPOINT=http://localhost:9999/blazegraph/namespace/kb/sparql npm start"
+  ontodia: #ping -w3 192.168.130.3/24
+    #command: "SPARQL_ENDPOINT=http://localhost:9999/blazegraph/namespace/kb/sparql npm start"
     depends_on:
       - blazegraph
     build:
       context: ./
       dockerfile: Dockerfile
+    hostname: ontodia
+    container_name: ontodia
     ports:
       - "5000:5000"
+
+  blazegraph:
+    image: metaphacts/blazegraph-basic:latest
+    hostname: blazegraph
+    container_name: blazegraph
+    ports:
+      - "9999:8080"
