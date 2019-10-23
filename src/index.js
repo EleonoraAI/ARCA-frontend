@@ -17,7 +17,6 @@ function onWorkspaceMounted(workspace) {
     //     console.log(iri);
     // });
 
-
     //c'è un modo di fare la ricerca solo sullo sparql endpoint locale???
     //vedere l'integrazione del codice!!!
     //modularizzazione react macrocomponenti 1 ontodia 2 libreria etc.
@@ -42,7 +41,6 @@ function onWorkspaceMounted(workspace) {
 const props = {
     ref: onWorkspaceMounted,
 };
-
 
 //stato dell'elemento in comune.. sapere la risorsa selezionata
 //stato risorsa selezionata

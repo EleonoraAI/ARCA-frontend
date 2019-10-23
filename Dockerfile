@@ -1,6 +1,6 @@
 #Docker file image
 
-FROM node:12.8.1
+FROM node:latest
 
 #set working directory
 WORKDIR /app
@@ -9,8 +9,7 @@ WORKDIR /app
 COPY package*.json ./
 ADD . /app
 
-RUN npm i -f
-RUN npm install npm@6.11.2
+RUN npm install
 
 #Bundle app source
 COPY . .
