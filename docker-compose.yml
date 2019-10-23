@@ -18,3 +18,5 @@ services:
     container_name: blazegraph
     ports:
       - "9999:8080"
+    expose:
+      - "8080"
