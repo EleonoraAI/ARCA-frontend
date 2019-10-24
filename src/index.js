@@ -120,10 +120,13 @@ const props = {
         //     return {
         //         icon: cogIcon
         //     };
+
+        //BOOK
         if (types.indexOf('http://schema.org/LERMAbook') !== -1) {
             return {
                 color: '#80040a'
             };
+        //CONCEPTS
         } else if (types.indexOf('http://www.w3.org/2002/07/owl#LERMATopConcept') !== -1) {
             return {
                 color: '#00FF00'
@@ -135,6 +138,23 @@ const props = {
         } else if (types.indexOf('http://www.w3.org/2002/07/owl#LERMAOtherConcept') !== -1) {
             return {
                 color: '#00FF00'
+            };
+        //METADATA
+        } else if (types.indexOf('http://www.w3.org/2002/07/owl#MetadataYearPublication') !== -1) {
+            return {
+                color: '#A9A9A9'
+            };
+        } else if (types.indexOf('http://www.w3.org/2002/07/owl#MetadataChronology') !== -1) {
+            return {
+                color: '#A9A9A9'
+            };
+        } else if (types.indexOf('http://www.w3.org/2002/07/owl#MetadataTopic') !== -1) {
+            return {
+                color: '#A9A9A9'
+            };
+        } else if (types.indexOf('http://www.w3.org/2002/07/owl#MetadataTypology') !== -1) {
+            return {
+                color: '#A9A9A9'
             };
         // } else if (types.indexOf('http://www.w3.org/2002/07/owl#DatatypeProperty') !== -1) {
         //     return {
