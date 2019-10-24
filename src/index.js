@@ -41,77 +41,73 @@ function onWorkspaceMounted(workspace) {
 }
 
 const props = {
-        ref: onWorkspaceMounted,
-        languages: [{
-                code: 'it',
-                label: 'Italiano'
-            },
-            {
-                code: 'en',
-                label: 'Inglese'
-            },
-            {
-                code: 'de',
-                label: 'Tedesco'
-            },
-            {
-                code: 'ru',
-                label: 'Russo'
-            },
-        ],
-        language: 'it',
-        layout: [{
-                code: 'ru',
-                label: 'Russo'
-            },
-            viewOptions: {
-                onIriClick: ({
-                    iri
-                }) => window.open(iri),
-                groupBy: [{
-                    linkType: 'http://www.researchspace.org/ontology/group',
-                    linkDirection: 'in'
-                }, ],
-            },
-            typeStyleResolver: types => {
-                if (types.indexOf('http://www.w3.org/2000/01/rdf-schema#Class') !== -1) {
-                    return {
-                        icon: certificateIcon
-                    };
-                } else if (types.indexOf('http://www.w3.org/2002/07/owl#Class') !== -1) {
-                    return {
-                        icon: certificateIcon
-                    };
-                } else if (types.indexOf('http://www.w3.org/2002/07/owl#ObjectProperty') !== -1) {
-                    return {
-                        icon: cogIcon
-                    };
-                } else if (types.indexOf('http://schema.org/LERMAbook') !== -1) {
-                    return {
-                        color: '#80040a'
-                    };
-                } else if (types.indexOf('http://www.w3.org/2002/07/owl#DatatypeProperty') !== -1) {
-                    return {
-                        color: '#046380'
-                    };
-                } else {
-                    return undefined;
-                }
-            },
-        };
+    ref: onWorkspaceMounted,
+    languages: [{
+            code: 'it',
+            label: 'Italiano'
+        },
+        {
+            code: 'en',
+            label: 'Inglese'
+        },
+        {
+            code: 'de',
+            label: 'Tedesco'
+        },
+        {
+            code: 'ru',
+            label: 'Russo'
+        },
+    ],
+    language: 'it',
+    viewOptions: {
+        onIriClick: ({
+            iri
+        }) => window.open(iri),
+        groupBy: [{
+            linkType: 'http://www.researchspace.org/ontology/group',
+            linkDirection: 'in'
+        }, ],
+    },
+    typeStyleResolver: types => {
+        if (types.indexOf('http://www.w3.org/2000/01/rdf-schema#Class') !== -1) {
+            return {
+                icon: certificateIcon
+            };
+        } else if (types.indexOf('http://www.w3.org/2002/07/owl#Class') !== -1) {
+            return {
+                icon: certificateIcon
+            };
+        } else if (types.indexOf('http://www.w3.org/2002/07/owl#ObjectProperty') !== -1) {
+            return {
+                icon: cogIcon
+            };
+        } else if (types.indexOf('http://schema.org/LERMAbook') !== -1) {
+            return {
+                color: '#80040a'
+            };
+        } else if (types.indexOf('http://www.w3.org/2002/07/owl#DatatypeProperty') !== -1) {
+            return {
+                color: '#046380'
+            };
+        } else {
+            return undefined;
+        }
+    },
+};
 
 
 
 
-        //stato dell'elemento in comune.. sapere la risorsa selezionata
-        //stato risorsa selezionata
-        // quando in ontodia viene visualizzata una nuova risorsa cambia questo stato... 
-        // a seconda della risorsa selezionata visualizza i risultati corrispondenti.
-        // tutorial come integrare più componenti come comporre a partire da un componente
+//stato dell'elemento in comune.. sapere la risorsa selezionata
+//stato risorsa selezionata
+// quando in ontodia viene visualizzata una nuova risorsa cambia questo stato... 
+// a seconda della risorsa selezionata visualizza i risultati corrispondenti.
+// tutorial come integrare più componenti come comporre a partire da un componente
 
-        document.addEventListener('DOMContentLoaded', () => {
-            const container = document.createElement('div');
-            container.id = 'root';
-            document.body.appendChild(container);
-            ReactDOM.render(React.createElement(Ontodia.Workspace, props), container)
-        });
+document.addEventListener('DOMContentLoaded', () => {
+    const container = document.createElement('div');
+    container.id = 'root';
+    document.body.appendChild(container);
+    ReactDOM.render(React.createElement(Ontodia.Workspace, props), container)
+});
