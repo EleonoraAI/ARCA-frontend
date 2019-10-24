@@ -35,14 +35,11 @@ function onWorkspaceMounted(workspace) {
                     'http://xmlns.com/foaf/0.1/img',
                 ],
                 queryMethod: Ontodia.SparqlQueryMethod.GET,
-
                 fullTextSearch: {
                     prefix: 'PREFIX dbo: <http://schema.org/LERMAbook/>\n',
                     queryPattern: `
                           ?inst rdfs:label ?searchLabel.
                           ?searchLabel bif:contains "\${text}".
-                          ?inst dbo:wikiPageID ?origScore .
-                          BIND(0-?origScore as ?score)
                     `,
                 },
                 classTreeQuery: `
@@ -77,7 +74,6 @@ function onWorkspaceMounted(workspace) {
     });
 }
 
-
 const props = {
     ref: onWorkspaceMounted,
     languages: [{
@@ -88,39 +84,26 @@ const props = {
             code: 'en',
             label: 'Inglese'
         },
-        {
-            code: 'de',
-            label: 'Tedesco'
-        },
-        {
-            code: 'ru',
-            label: 'Russo'
-        },
+        // {
+        //     code: 'de',
+        //     label: 'Tedesco'
+        // },
+        // {
+        //     code: 'ru',
+        //     label: 'Russo'
+        // },
     ],
     language: 'it',
     viewOptions: {
         onIriClick: ({
             iri
         }) => window.open(iri),
-        groupBy: [{
-            linkType: 'http://www.researchspace.org/ontology/group',
-            linkDirection: 'in'
-        }, ],
+        // groupBy: [{
+        //     linkType: 'http://www.researchspace.org/ontology/group',
+        //     linkDirection: 'in'
+        // }, ],
     },
     typeStyleResolver: types => {
-        // if (types.indexOf('http://www.w3.org/2000/01/rdf-schema#Class') !== -1) {
-        //     return {
-        //         icon: certificateIcon
-        //     };
-        // } else if (types.indexOf('http://www.w3.org/2002/07/owl#Class') !== -1) {
-        //     return {
-        //         icon: certificateIcon
-        //     };
-        // } else if (types.indexOf('http://www.w3.org/2002/07/owl#ObjectProperty') !== -1) {
-        //     return {
-        //         icon: cogIcon
-        //     };
-
         //BOOK
         if (types.indexOf('http://schema.org/LERMAbook') !== -1) {
             return {
@@ -140,26 +123,22 @@ const props = {
                 color: '#00FF00'
             };
         //METADATA
-        } else if (types.indexOf('http://www.w3.org/2002/07/owl#MetadataYearPublication') !== -1) {
+        } else if (types.indexOf('http://www.w3.org/2002/07/owl#LERMAMetadataYearPublication') !== -1) {
             return {
                 color: '#A9A9A9'
             };
-        } else if (types.indexOf('http://www.w3.org/2002/07/owl#MetadataChronology') !== -1) {
+        } else if (types.indexOf('http://www.w3.org/2002/07/owl#LERMAMetadataChronology') !== -1) {
             return {
                 color: '#A9A9A9'
             };
-        } else if (types.indexOf('http://www.w3.org/2002/07/owl#MetadataTopic') !== -1) {
+        } else if (types.indexOf('http://www.w3.org/2002/07/owl#LERMAMetadataTopic') !== -1) {
             return {
                 color: '#A9A9A9'
             };
-        } else if (types.indexOf('http://www.w3.org/2002/07/owl#MetadataTypology') !== -1) {
+        } else if (types.indexOf('http://www.w3.org/2002/07/owl#LERMAMetadataTypology') !== -1) {
             return {
                 color: '#A9A9A9'
             };
-        // } else if (types.indexOf('http://www.w3.org/2002/07/owl#DatatypeProperty') !== -1) {
-        //     return {
-        //         color: '#046380'
-        //     };
         } else {
             return {
                 color: '#046380'
