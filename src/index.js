@@ -34,11 +34,49 @@ function onWorkspaceMounted(workspace) {
                     'http://xmlns.com/foaf/0.1/depiction',
                     'http://xmlns.com/foaf/0.1/img',
                 ],
-                queryMethod: Ontodia.SparqlQueryMethod.GET
+                queryMethod: Ontodia.SparqlQueryMethod.GET,
+
+                fullTextSearch: {
+                    prefix: 'PREFIX dbo: <http://schema.org/LERMAbook/>\n',
+                    queryPattern: `
+                          ?inst rdfs:label ?searchLabel.
+                          ?searchLabel bif:contains "\${text}".
+                          ?inst dbo:wikiPageID ?origScore .
+                          BIND(0-?origScore as ?score)
+                    `,
+                },
+                classTreeQuery: `
+                    SELECT distinct ?LERMAbook ?label WHERE {
+                        ?LERMAbook rdfs:label ?label.
+                    }
+                `,
+                elementInfoQuery: `
+                    CONSTRUCT {
+                        ?inst rdf:type ?LERMAbook .
+                        ?inst rdfs:label ?label .
+                        ?inst ?propType ?propValue.
+                    } WHERE {
+                        VALUES (?inst) {\${ids}}
+                        ?inst rdf:type ?LERMAbook .
+                        ?inst rdfs:label ?label .
+                        FILTER (!contains(str(?LERMAbook), 'http://dbpedia.org/class/yago'))
+                        OPTIONAL {?inst ?propType ?propValue.
+                        FILTER (isLiteral(?propValue)) }
+                    }               
+                `,
+                filterElementInfoPattern: `
+                    OPTIONAL {?inst rdf:type ?foundClass. FILTER (!contains(str(?foundClass), 'http://dbpedia.org/class/yago'))}
+                    BIND (coalesce(?foundClass, owl:Thing) as ?class)
+                    OPTIONAL {?inst \${dataLabelProperty} ?label}`,
+                imageQueryPattern: ` { ?inst ?linkType ?fullImage } UNION { [] ?linkType ?inst. BIND(?inst as ?fullImage) }
+                        BIND(CONCAT("https://commons.wikimedia.org/w/thumb.php?f=",
+                        STRAFTER(STR(?fullImage), "Special:FilePath/"), "&w=200") AS ?image)
+                `,
             }, Ontodia.DBPediaSettings),
         ]),
     });
 }
+
 
 const props = {
     ref: onWorkspaceMounted,
@@ -70,28 +108,42 @@ const props = {
         }, ],
     },
     typeStyleResolver: types => {
-        if (types.indexOf('http://www.w3.org/2000/01/rdf-schema#Class') !== -1) {
-            return {
-                icon: certificateIcon
-            };
-        } else if (types.indexOf('http://www.w3.org/2002/07/owl#Class') !== -1) {
-            return {
-                icon: certificateIcon
-            };
-        } else if (types.indexOf('http://www.w3.org/2002/07/owl#ObjectProperty') !== -1) {
-            return {
-                icon: cogIcon
-            };
-        } else if (types.indexOf('http://schema.org/LERMAbook') !== -1) {
+        // if (types.indexOf('http://www.w3.org/2000/01/rdf-schema#Class') !== -1) {
+        //     return {
+        //         icon: certificateIcon
+        //     };
+        // } else if (types.indexOf('http://www.w3.org/2002/07/owl#Class') !== -1) {
+        //     return {
+        //         icon: certificateIcon
+        //     };
+        // } else if (types.indexOf('http://www.w3.org/2002/07/owl#ObjectProperty') !== -1) {
+        //     return {
+        //         icon: cogIcon
+        //     };
+        if (types.indexOf('http://schema.org/LERMAbook') !== -1) {
             return {
                 color: '#80040a'
             };
-        } else if (types.indexOf('http://www.w3.org/2002/07/owl#DatatypeProperty') !== -1) {
+        } else if (types.indexOf('http://www.w3.org/2002/07/owl#LERMATopConcept') !== -1) {
+            return {
+                color: '#00FF00'
+            };
+        } else if (types.indexOf('http://www.w3.org/2002/07/owl#LERMAConcept',) !== -1) {
+            return {
+                color: '#00FF00'
+            };
+        } else if (types.indexOf('http://www.w3.org/2002/07/owl#LERMAOtherConcept') !== -1) {
+            return {
+                color: '#00FF00'
+            };
+        // } else if (types.indexOf('http://www.w3.org/2002/07/owl#DatatypeProperty') !== -1) {
+        //     return {
+        //         color: '#046380'
+        //     };
+        } else {
             return {
                 color: '#046380'
             };
-        } else {
-            return undefined;
         }
     },
 };
