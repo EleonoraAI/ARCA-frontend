@@ -35,48 +35,19 @@ function onWorkspaceMounted(workspace) {
           'http://xmlns.com/foaf/0.1/img',
         ],
         queryMethod: Ontodia.SparqlQueryMethod.GET,
-        fullTextSearch: {
-          prefix: 'PREFIX dbo: <http://schema.org/LERMAbook/>\n',
-          queryPattern: `
-                          ?inst rdfs:label ?searchLabel.
-                          ?searchLabel bif:contains "\${text}".
-                    `,
-        },
-        classTreeQuery: `
-                    SELECT distinct ?LERMAbook ?label WHERE {
-                        ?LERMAbook rdfs:label ?label.
-                    }
-                `,
-        elementInfoQuery: `
-                    CONSTRUCT {
-                        ?inst rdf:type ?LERMAbook .
-                        ?inst rdfs:label ?label .
-                        ?inst ?propType ?propValue.
-                    } WHERE {
-                        VALUES (?inst) {\${ids}}
-                        ?inst rdf:type ?LERMAbook .
-                        ?inst rdfs:label ?label .
-                        FILTER (!contains(str(?LERMAbook), 'http://dbpedia.org/class/yago'))
-                        OPTIONAL {?inst ?propType ?propValue.
-                        FILTER (isLiteral(?propValue)) }
-                    }               
-                `,
-        filterElementInfoPattern: `
-                    OPTIONAL {?inst rdf:type ?foundClass. FILTER (!contains(str(?foundClass), 'http://dbpedia.org/class/yago'))}
-                    BIND (coalesce(?foundClass, owl:Thing) as ?class)
-                    OPTIONAL {?inst \${dataLabelProperty} ?label}`,
-        imageQueryPattern: ` { ?inst ?linkType ?fullImage } UNION { [] ?linkType ?inst. BIND(?inst as ?fullImage) }
-                        BIND(CONCAT("https://commons.wikimedia.org/w/thumb.php?f=",
-                        STRAFTER(STR(?fullImage), "Special:FilePath/"), "&w=200") AS ?image)
-                `,
       }, Ontodia.DBPediaSettings),
-    ]),
+    ],
+    {
+      mergeMode: 'sequentialFetching' ,
+    },
+    ),
   });
 }
 
 const props = {
   ref: onWorkspaceMounted,
-  languages: [{
+  languages: [
+    {
       code: 'it',
       label: 'Italiano'
     },
@@ -102,40 +73,33 @@ const props = {
     //     linkType: 'http://www.researchspace.org/ontology/group',
     //     linkDirection: 'in'
     // }, ],
+    
   },
   typeStyleResolver: types => {
     //BOOK
-    if (types.indexOf('http://schema.org/LERMAbook') !== -1) {
+    if (types.indexOf('http://lerma.example.org/book') !== -1) {
       return {
         color: '#80040a'
       };
-      //CONCEPTS
-    } else if (types.indexOf('http://www.w3.org/2002/07/owl#LERMATopConcept') !== -1) {
+      //CONCEPT
+    } else if (types.indexOf('http://lerma.example.org/concept') !== -1) {
       return {
-        color: '#00FF00'
-      };
-    } else if (types.indexOf('http://www.w3.org/2002/07/owl#LERMAConcept', ) !== -1) {
-      return {
-        color: '#00FF00'
-      };
-    } else if (types.indexOf('http://www.w3.org/2002/07/owl#LERMAOtherConcept') !== -1) {
-      return {
-        color: '#00FF00'
+        color: '#00961c'
       };
       //METADATA
-    } else if (types.indexOf('http://www.w3.org/2002/07/owl#LERMAMetadataYearPublication') !== -1) {
+    } else if (types.indexOf('http://lerma.example.org/metadata/YearPublication') !== -1) {
       return {
         color: '#A9A9A9'
       };
-    } else if (types.indexOf('http://www.w3.org/2002/07/owl#LERMAMetadataChronology') !== -1) {
+    } else if (types.indexOf('http://lerma.example.org/metadata/Chronology') !== -1) {
       return {
         color: '#A9A9A9'
       };
-    } else if (types.indexOf('http://www.w3.org/2002/07/owl#LERMAMetadataTopic') !== -1) {
+    } else if (types.indexOf('http://lerma.example.org/metadata/Topic') !== -1) {
       return {
         color: '#A9A9A9'
       };
-    } else if (types.indexOf('http://www.w3.org/2002/07/owl#LERMAMetadataTypology') !== -1) {
+    } else if (types.indexOf('http://lerma.example.org/metadata/Typology') !== -1) {
       return {
         color: '#A9A9A9'
       };
@@ -146,9 +110,6 @@ const props = {
     }
   },
 };
-
-
-
 
 //stato dell'elemento in comune.. sapere la risorsa selezionata
 //stato risorsa selezionata
