@@ -30,6 +30,16 @@ function onWorkspaceMounted(workspace) {
           property: "http://dbpedia.org/ontology/wikiPageWikiLink",
           visible: false,
         },
+        {
+          '@type': 'LinkTypeOptions',
+          property: "http://dbpedia.org/ontology/associate",
+          visible: false,
+        },
+        {
+          '@type': 'LinkTypeOptions',
+          property: "http://www.w3.org/2000/01/rdf-schema#seeAlso",
+          visible: false,
+        },
       ], 
     }),
     validateLinks: true,

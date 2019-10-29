@@ -2,15 +2,15 @@
     display: none;
 }        
 
-/* .ontodia-accordion-item--vertical:first-child[style] {
+.ontodia-accordion-item--vertical:first-child[style] {
     display: none !important;
 }    
 
 .ontodia-accordion-item--horizontal:last-child[style] {
     display: none !important;
-}     */
+}    
 
-/* .ontodia-accordion-item__header 
+.ontodia-accordion-item__header 
  {
     visibility: hidden;
     position: relative;
@@ -26,4 +26,8 @@
     top: 34%;
     left: 13px;
     margin-top: -2px;
-} */
+}
+
+.ontodia-toolbar {
+    background: rgb(241, 241, 241);
+}
