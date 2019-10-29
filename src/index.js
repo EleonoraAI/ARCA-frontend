@@ -11,7 +11,7 @@ function onWorkspaceMounted(workspace) {
   }
 
   const model = workspace.getModel();
-
+ 
   // model.graph.on('action:iriClick', (iri) => {
   //     window.open(iri);
   //     console.log(iri);
@@ -22,7 +22,18 @@ function onWorkspaceMounted(workspace) {
   //modularizzazione react macrocomponenti 1 ontodia 2 libreria etc.
 
   model.importLayout({
+    diagram: Ontodia.makeSerializedDiagram({
+      linkTypeOptions: 
+      [
+        {
+          '@type': 'LinkTypeOptions',
+          property: "http://dbpedia.org/ontology/wikiPageWikiLink",
+          visible: false,
+        },
+      ], 
+    }),
     validateLinks: true,
+    mergeMode: 'sequentialFetching' ,
     dataProvider: new Ontodia.CompositeDataProvider([
       new Ontodia.SparqlDataProvider({
         endpointUrl: '/sparql-endpoint',
@@ -37,15 +48,14 @@ function onWorkspaceMounted(workspace) {
         queryMethod: Ontodia.SparqlQueryMethod.GET,
       }, Ontodia.DBPediaSettings),
     ],
-    {
-      mergeMode: 'sequentialFetching' ,
-    },
     ),
   });
 }
 
 const props = {
+  leftPanelInitiallyOpen: true,
   ref: onWorkspaceMounted,
+
   languages: [
     {
       code: 'it',
@@ -75,6 +85,13 @@ const props = {
     // }, ],
     
   },
+  // instances: [{
+  //     id: 'instances',
+  //     type: WorkspaceLayoutType.Component,
+  //     content: instancesSearch,
+  //     heading: 'XXX',
+  // }],
+
   typeStyleResolver: types => {
     //BOOK
     if (types.indexOf('http://lerma.example.org/book') !== -1) {
