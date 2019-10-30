@@ -1,6 +1,8 @@
 var React = require('react');
 var ReactDOM = require('react-dom');
 var Ontodia = require('ontodia')
+import Workspace from './workspace';
+// var Workspace = require('./workspace')
 
 //require('jointjs/css/layout.css');
 //require('jointjs/css/themes/default.css');
@@ -11,7 +13,7 @@ function onWorkspaceMounted(workspace) {
   }
 
   const model = workspace.getModel();
- 
+
   // model.graph.on('action:iriClick', (iri) => {
   //     window.open(iri);
   //     console.log(iri);
@@ -23,7 +25,7 @@ function onWorkspaceMounted(workspace) {
 
   model.importLayout({
     diagram: Ontodia.makeSerializedDiagram({
-      linkTypeOptions: 
+      linkTypeOptions:
       [
         {
           '@type': 'LinkTypeOptions',
@@ -40,7 +42,7 @@ function onWorkspaceMounted(workspace) {
           property: "http://www.w3.org/2000/01/rdf-schema#seeAlso",
           visible: false,
         },
-      ], 
+      ],
     }),
     validateLinks: true,
     mergeMode: 'sequentialFetching' ,
@@ -93,7 +95,7 @@ const props = {
     //     linkType: 'http://www.researchspace.org/ontology/group',
     //     linkDirection: 'in'
     // }, ],
-    
+
   },
   // instances: [{
   //     id: 'instances',
@@ -140,7 +142,7 @@ const props = {
 
 //stato dell'elemento in comune.. sapere la risorsa selezionata
 //stato risorsa selezionata
-// quando in ontodia viene visualizzata una nuova risorsa cambia questo stato... 
+// quando in ontodia viene visualizzata una nuova risorsa cambia questo stato...
 // a seconda della risorsa selezionata visualizza i risultati corrispondenti.
 // tutorial come integrare più componenti come comporre a partire da un componente
 
@@ -148,5 +150,5 @@ document.addEventListener('DOMContentLoaded', () => {
   const container = document.createElement('div');
   container.id = 'root';
   document.body.appendChild(container);
-  ReactDOM.render(React.createElement(Ontodia.Workspace, props), container)
+  ReactDOM.render(React.createElement(Workspace, props), container)
 });

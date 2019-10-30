@@ -21,6 +21,9 @@
     "ontodia": "^0.10.0",
     "react": "^15.0.0",
     "react-dom": "^15.0.0",
+    "ts-loader": "^6.2.1",
+    "tslib": "^1.10.0",
+    "typescript": "^3.6.4",
     "webpack-cli": "^3.3.5",
     "whatwg-fetch": "^3.0.0"
   },

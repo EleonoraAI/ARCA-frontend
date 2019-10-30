@@ -15,12 +15,25 @@ module.exports = {
     devtool: "source-map",
 
     resolve: {
-        extensions: [".webpack.js", ".web.js", ".js"],
+        extensions: ['.ts', '.tsx', ".webpack.js", ".web.js", ".js"],
         alias: {
             // awful and temporary workaround to reference browser bundle instead of node's, see:
             // https://github.com/wycats/handlebars.js/issues/1102
             "handlebars": path.join(__dirname, 'node_modules', "handlebars", "dist", "handlebars.min.js")
         }
+    },
+
+    module: {
+        rules: [
+            {test: /\.ts$|\.tsx$/, use: ['ts-loader']},
+            {test: /\.css$/, use: ['style-loader', 'css-loader']},
+            {test: /\.scss$/, use: ['style-loader', 'css-loader', 'sass-loader']},
+            {
+                test: /\.(jpe?g|gif|png|svg)$/,
+                use: [{loader: 'url-loader'}],
+            },
+            {test: /\.ttl$/, use: ['raw-loader']},
+        ]
     },
 
     plugins: [
