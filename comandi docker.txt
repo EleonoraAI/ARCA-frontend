@@ -1,0 +1,21 @@
+####DOCKER FILE####
+
+#elenco immagini : docker images -a
+
+#elimina immagine: docker rmi node -f
+
+#immagini in run: docker stats
+
+#build and tag docker image
+docker build -t react-arch .
+
+#run image
+docker run -it -p 5000:5000 arca
+
+
+####DOCKER COMPOSE####
+
+#Per avviare tutti i servizi (dockerfile o immagini)
+docker-compose up -d
+#visualizza lo stato dei container e le relative porte mappate
+docker-compose ps

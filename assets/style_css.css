@@ -1,0 +1,33 @@
+.ontodia-paper-area__watermark {
+    display: none;
+}        
+
+.ontodia-accordion-item--vertical:first-child[style] {
+    display: none !important;
+}    
+
+.ontodia-accordion-item--horizontal:last-child[style] {
+    display: none !important;
+}    
+
+.ontodia-accordion-item__header 
+ {
+    visibility: hidden;
+    position: relative;
+}
+
+.ontodia-accordion-item__header:after {
+    visibility: visible;
+    position: absolute;
+    content: "Search";
+    font-size: 16px;
+    background: #ffffff;
+    cursor: default;
+    top: 34%;
+    left: 13px;
+    margin-top: -2px;
+}
+
+.ontodia-toolbar {
+    background: rgb(241, 241, 241);
+}
