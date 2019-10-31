@@ -1,6 +1,6 @@
 var React = require('react');
 var ReactDOM = require('react-dom');
-var Ontodia = require('@eleonoraai/ontodia');
+var Ontodia = require('@eleonoraai/ontodia-arca');
 
 function onWorkspaceMounted(workspace) {
   if (!workspace) {
