@@ -35,9 +35,7 @@ jspm_packages
 
 # Optional REPL history
 .node_repl_history
-.npmrc
 
 #text commands
-comandi docker.txt
-comamands.txt
 commands.txt
+
