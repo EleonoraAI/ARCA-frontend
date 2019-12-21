@@ -8,7 +8,8 @@ function onWorkspaceMounted(workspace) {
   }
 
   const model = workspace.getModel();
- 
+  
+
   model.importLayout({
     diagram: Ontodia.makeSerializedDiagram({
       linkTypeOptions: 
@@ -28,6 +29,11 @@ function onWorkspaceMounted(workspace) {
           property: "http://www.w3.org/2000/01/rdf-schema#seeAlso",
           visible: false,
         },
+        {
+          '@type': 'LinkTypeOptions',
+          property: "http://dbpedia.org/ontology/wikiPageEternalLink",
+          visible: false,
+        },
       ], 
     }),
     validateLinks: true,
@@ -37,6 +43,16 @@ function onWorkspaceMounted(workspace) {
         endpointUrl: '/sparql-endpoint',
         queryMethod: Ontodia.SparqlQueryMethod.GET
       }, Ontodia.OWLStatsSettings),
+
+      new Ontodia.SparqlDataProvider({
+        endpointUrl: '/wikidata',
+        imagePropertyUris: [
+          'http://xmlns.com/foaf/0.1/depiction',
+          'http://xmlns.com/foaf/0.1/img',
+        ],
+        queryMethod: Ontodia.SparqlQueryMethod.POST,
+      }, Ontodia.WikidataSettings),
+
       new Ontodia.SparqlDataProvider({
         endpointUrl: 'http://dbpedia.org/sparql',
         imagePropertyUris: [
@@ -49,6 +65,7 @@ function onWorkspaceMounted(workspace) {
     ),
   });
 }
+
 
 const props = {
   leftPanelInitiallyOpen: true,
@@ -63,10 +80,10 @@ const props = {
       code: 'en',
       label: 'Inglese'
     },
-    // {
-    //     code: 'de',
-    //     label: 'Tedesco'
-    // },
+    {
+        code: 'de',
+        label: 'Tedesco'
+    },
     // {
     //     code: 'ru',
     //     label: 'Russo'
@@ -79,31 +96,36 @@ const props = {
     }) => window.open(iri),
   },
 
+
   typeStyleResolver: types => {
     //BOOK
-    if (types.indexOf('http://lerma.example.org/book') !== -1) {
+    if (types.indexOf('http://lerma.org/Book') !== -1) {
       return {
-        color: '#80040a'
+        color: '#80040a',
+        icon: '../images/lerma_logo.png'
+        // background: '#ffff3b',
+        // icon: logo_lerma
       };
       //CONCEPT
-    } else if (types.indexOf('http://lerma.example.org/concept') !== -1) {
+    } else if (types.indexOf('http://lerma.org/Concept') !== -1) {
       return {
-        color: '#00961c'
+        color: '#00961c',
+
       };
       //METADATA
-    } else if (types.indexOf('http://lerma.example.org/metadata/YearPublication') !== -1) {
+    } else if (types.indexOf('http://lerma.org/metadata/YearPublication') !== -1) {
       return {
         color: '#A9A9A9'
       };
-    } else if (types.indexOf('http://lerma.example.org/metadata/Chronology') !== -1) {
+    } else if (types.indexOf('http://lerma.org/metadata/Chronology') !== -1) {
       return {
         color: '#A9A9A9'
       };
-    } else if (types.indexOf('http://lerma.example.org/metadata/Topic') !== -1) {
+    } else if (types.indexOf('http://lerma.org/metadata/Topic') !== -1) {
       return {
         color: '#A9A9A9'
       };
-    } else if (types.indexOf('http://lerma.example.org/metadata/Typology') !== -1) {
+    } else if (types.indexOf('http://lerma.org/metadata/Typology') !== -1) {
       return {
         color: '#A9A9A9'
       };

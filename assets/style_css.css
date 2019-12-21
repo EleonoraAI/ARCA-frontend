@@ -10,6 +10,11 @@
     display: none !important;
 }    
 
+.ontodia-standard-template__thumbnail-icon {
+    max-height: 60px !important;
+    max-width: 60px !important;
+}
+
 /* .ontodia-accordion-item__header 
  {
     visibility: hidden;
