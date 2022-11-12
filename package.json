@@ -21,7 +21,7 @@
     "ontodia": "^0.10.0",
     "react": "^15.0.0",
     "react-dom": "^15.0.0",
-    "webpack-cli": "^3.3.5",
+    "webpack-cli": "^3.3.12",
     "whatwg-fetch": "^3.0.0"
   },
   "devDependencies": {
